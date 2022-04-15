@@ -20,6 +20,7 @@ Western Region,HSD (in KL),2022-04-01,Paro NIE Bridge,100667.39,100.67
 Western Region,HSD (in KL),2022-04-01,Langlitsawa,101040.36,101.04
 Western Region,HSD (in KL),2022-04-01,Wangdue Zero Point,100772.16,100.77
 Western Region,HSD (in KL),2022-04-01,Phuentsholing Main gate,98497.76,98.5
+Region,Product,Approved_Date,Station,RSP/KL,RSP/L
 Western Region,MS (in KL),2022-04-01,Phuentsholing,91373.05,91.37
 Western Region,MS (in KL),2022-04-01,Rinchending,91453.51,91.45
 Western Region,MS (in KL),2022-04-01,Pasakha,91507.15,91.51
@@ -41,4 +42,4 @@ Western Region,MS (in KL),2022-04-01,Paro NIE Bridge,93791.95,93.79
 Western Region,MS (in KL),2022-04-01,Langlitsawa,94031.51,94.03
 Western Region,MS (in KL),2022-04-01,Wangdue Zero Point,93763.31,93.76
 Western Region,MS (in KL),2022-04-01,Phuentsholing Main gate,91373.05,91.37
-,,,,,
+
