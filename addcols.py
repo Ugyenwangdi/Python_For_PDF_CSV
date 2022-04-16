@@ -5,108 +5,119 @@
 # # import necessary packages
 import csv
 
-# def update_csv(name):
-
-#     ls = []
-#     # Open file
-#     with open('CSVremovedRepeated' + '\\' + '{}.csv'.format(name),'r') as file_obj:
+# j = 0
+def update_csv(name, index):
+    
+    ls = []
+    # Open file
+    with open('CSVremovedRepeated' + '\\' + '{}.csv'.format(name),'r') as file_obj:
         
-#         # Create reader object by passing the file
-#         # object to reader method
-#         reader_obj = csv.reader(file_obj)
+        # Create reader object by passing the file
+        # object to reader method
+        reader_obj = csv.reader(file_obj)
         
-#         # Iterate over each row in the csv
-#         # file using reader object
-#         for row in reader_obj:
-#             ls.append(row)
-#     # print(ls)
+        # Iterate over each row in the csv
+        # file using reader object
+        for row in reader_obj:
+            ls.append(row)
+    # print(ls)
+
+    # add company
+    # all companies in downloaded data
+    companies = ['Bharat Petroleum Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Indian Oil Corporation Limited', 'Indian Oil Corporation Limited', 'Hindustan Petroleum Corporation Limited', 'Hindustan Petroleum Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Indian Oil Corporation Limited', 'Indian Oil Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Indian Oil Corporation Limited', 'Indian Oil Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Bharat Petroleum Corporation Limited', 'Indian Oil Corporation Limited', 'Indian Oil Corporation Limited', 'Hindustan Petroleum Corporation Limited', 'Hindustan Petroleum Corporation Limited']
+
+    # Extract the new data from heading
+    new_dta = []
+    for i in ls:
+        header = i[0]
+        header = header.split("#")[0]
+        header = header.split("NEW PRICI NG DETA ILS")
+        header = header[1].split(":")
+        header = header[1:]
+        # print(header)
+        region = header[0].replace("Product", "")
+        # print(region)
+        product = header[1].replace("Approved Date", "")
+        # print(product)
+        approved_date = header[2].replace("\n", "")
+        # print(approved_date)
+        company = companies[index]
+        # print(company)
+        new_dta = [region, product, company, approved_date]
+        # j += 1
+        # print(new_dta)
+
+        break
+    ############### From the above list to delete the first item for each list item ######
+    for i in ls:
+        # print(i)
+        i.pop(0)
+    # print(ls)
+    # print(new_dta[:8])
 
 
-#     # Extract the new data from heading
-#     new_dta = []
-#     for i in ls:
-#         header = i[0]
-#         header = header.split("#")[0]
-#         header = header.split("NEW PRICI NG DETA ILS")
-#         header = header[1].split(":")
-#         header = header[1:]
-#         # print(header)
-#         region = header[0].replace("Product", "")
-#         # print(region)
-#         product = header[1].replace("Approved Date", "")
-#         # print(product)
-#         approved_date = header[2].replace("\n", "")
-#         # print(approved_date)
+    ######### prepare a column and rows #############
+
+    # extract column 1 for the column header
+    cols = ls[1]
+    # print(cols)
+
+    newlst = ['Region', 'Product', 'Company', 'Approved_Date']
+    newcols = newlst + cols  # ['Region', 'Product', 'Company', 'Approved_Date', 'Station', 'RSP/KL', 'RSP/L']
+    # print(newcols)
+
+
+    # # select rows for row values
+    # # insert values for 'Region', 'Product', 'Approved_Date' in the row_data list
+
+    row_data = ls[2:]
+    new_rows = []
+    for item in row_data:
+        item = new_dta + item
+        new_rows.append(item)
+
+        # print(item)
+    # print(new_rows[:8])
+
+
+
+
+    ########### ############### Create a csv file with new rows and columns added ##### ########
+    import csv
         
-#         new_dta = [region, product, approved_date]
-#         # print(new_dta)
-#         break
+    # writing to csv file
 
-#     ############### From the above list to delete the first item for each list item ######
-#     for i in ls:
-#         i = i.pop(0)
-#     # print(ls)
-
-
-#     ######### prepare a column and rows #############
-
-#     # extract column 1 for the column header
-#     cols = ls[1]
-
-#     newlst = ['Region', 'Product', 'Approved_Date']
-#     newcols = newlst + cols  # ['Region', 'Product', 'Approved_Date', 'Station', 'RSP/KL', 'RSP/L']
-#     # print(newcols)
-
-#     # select rows for row values
-#     # insert values for 'Region', 'Product', 'Approved_Date' in the row_data list
-#     row_data = ls[2:]
-#     new_rows = []
-#     for item in row_data:
-#         item = new_dta + item
-#         new_rows.append(item)
-
-#         # print(item)
-#     # print(new_rows[:5])
-
-
-
-
-#     # ############ ############### Create a csv file with new rows and columns added ##### ########
-#     # import csv
-        
-#     # # writing to csv file
-
-#     with open('AddedColAndRowsCSV' + '\\' + '{}.csv'.format(name), 'w', newline='') as csvfile:
-#         # creating a csv writer object
-#         csvwriter = csv.writer(csvfile)
+    with open('AddedColAndRowsCSV' + '\\' + '{}.csv'.format(name), 'w', newline='') as csvfile:
+        # creating a csv writer object
+        csvwriter = csv.writer(csvfile)
             
-#         # writing the fields
-#         csvwriter.writerow(newcols)
+        # writing the fields
+        csvwriter.writerow(newcols)
             
-#         # writing the data rows
-#         csvwriter.writerows(new_rows)
+        # writing the data rows
+        csvwriter.writerows(new_rows)
 
-# # do it for all 20 files
-# for i in range(2):
-#     i += 1
-#     try:
-#         update_csv(i)
-#     finally:
-#         continue
-
-
-################# To merge all the csv files .. THis merges only the files present in the directory
-# cd into the directory which has multiple csv files
-# copy *.csv fuel_data.csv 
+# do it for all 20 files
+for i in range(10):
+    i += 1
+    try:
+        update_csv(i, i-1)
+    finally:
+        continue
 
 
-import pandas as pd
+# ################# To merge all the csv files .. THis merges only the files present in the directory
+# # cd into the directory which has multiple csv files
+# # copy *.csv fuel_data.csv 
 
 
-df = pd.read_csv("AddedColAndRowsCSV"+ "\\" + "fuel_data.csv")
-df =  df[df.Region != "Region"] 
+# import pandas as pd
 
-# df.column_name != whole string from the cell
-# now, all the rows with the column: Name and Value: "dog" will be deleted
 
-df.to_csv('bhutan_fuel_prices.csv', index=False)
+# df = pd.read_csv("AddedColAndRowsCSV"+ "\\" + "fuel_data.csv")
+# df =  df[df.Region != "Region"] 
+
+# # df.column_name != whole string from the cell
+# # now, all the rows with the column: Name and Value: "dog" will be deleted
+
+# df.to_csv('bhutan_fuel_prices.csv', index=False)
