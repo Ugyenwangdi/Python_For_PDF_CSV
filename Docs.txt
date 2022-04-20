@@ -1,0 +1,35 @@
+The final data set is a merged csv file converted from multiple pdf files downloaded from mosic Bhutan, MOEA which are the lists of 
+Approved POL Pricing Details. 
+
+Fuel dataset: bhutan_fuel_prices.csv
+
+The file order for the conversion of pdf to csv:
+
+Activate the env before running the files
+
+1. pdftocsv.py (To convert the pdf to csv and remove some duplicates)
+
+2. rename.py (To get the filenames, and companies)
+
+3. addcols.py (Add more columns which includes region, company, approved date, product)
+
+4. cd into the directory that has multiple csv files, and use commands mentioned towards the end of addcols.py file to merge all the files. Uncomment the following to
+remove the headers from the merged file
+
+
+# import pandas as pd
+
+# df = pd.read_csv("AddedColAndRowsCSV"+ "\\" + "fuel_data.csv")
+
+# # df = pd.read_csv("AddedColAndRowsCSV2"+ "\\" + "fuel_data2.csv")
+# # df = pd.read_csv("FinalCSV"+ "\\" + "fuel_data.csv")
+
+# df =  df[df.Region != "Region"] 
+
+# # df.column_name != whole string from the cell
+# # now, all the rows with the column: Name and Value: "dog" will be deleted
+
+# df.to_csv('bhutan_fuel_prices.csv', index=False)
+# # df.to_csv('bhutan_fuel_prices2.csv', index=False)
+# # df.to_csv('final.csv', index=False)
+ 
